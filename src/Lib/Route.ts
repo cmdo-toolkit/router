@@ -1,7 +1,7 @@
 import { pathToRegexp } from "path-to-regexp";
 
-import type { Action } from "./Action";
-import type { Parameter } from "./Params";
+import type { Action } from "../Types/Action";
+import type { Parameter } from "../Types/Params";
 import { parseParams } from "./Params";
 
 export class Route {

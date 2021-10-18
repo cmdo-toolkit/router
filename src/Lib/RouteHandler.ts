@@ -1,12 +1,14 @@
 import type { History, Location } from "history";
 
-import { Action, Redirect, Request, response } from "./Action";
-import { ActionRejectedError, RenderActionMissingError, RouteNotFoundError } from "./Error";
+import { ActionRejectedError } from "../Errors/Action";
+import { RenderActionMissingError, RouteNotFoundError } from "../Errors/Route";
+import type { Action, Redirect, Request } from "../Types/Action";
+import type { Resolved } from "../Types/Routes";
+import { getRoute } from "../Utils/Routes";
+import { response } from "./Action";
 import { getParams } from "./Params";
 import { Query } from "./Query";
 import type { Router } from "./Router";
-import type { Resolved } from "./Routes";
-import { getRoute } from "./Routes";
 import { State } from "./State";
 
 /*

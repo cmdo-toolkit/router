@@ -1,22 +1,8 @@
 import type { History } from "history";
 
+import type { JSONQuery } from "../Types/Query";
+import { toQueryObject, toQueryString } from "../Utils/Query";
 import { ValueStore } from "./ValueStore";
-
-/*
- |--------------------------------------------------------------------------------
- | Types
- |--------------------------------------------------------------------------------
- */
-
-type QueryObject = {
-  [key: string]: string;
-};
-
-/*
- |--------------------------------------------------------------------------------
- | Query
- |--------------------------------------------------------------------------------
- */
 
 export class Query extends ValueStore {
   public readonly history: History;
@@ -39,7 +25,7 @@ export class Query extends ValueStore {
    * @param key   - Key to update the value for.
    * @param value - Value to add to the key.
    */
-  public set(key: string | QueryObject, value?: string | number): void {
+  public set(key: string | JSONQuery, value?: string | number): void {
     if (typeof key === "string") {
       this.replace({
         ...this.get(),
@@ -96,47 +82,4 @@ export class Query extends ValueStore {
   public toString(): string {
     return toQueryString(this.get());
   }
-}
-
-/*
- |--------------------------------------------------------------------------------
- | Utilities
- |--------------------------------------------------------------------------------
- */
-
-/**
- * Takes a key/value pair object and generates a browser query string.
- *
- * @param store - key/value pair store to convert.
- *
- * @returns query string
- */
-function toQueryString(obj: any): string {
-  const query: string[] = [];
-  for (const key in obj) {
-    query.push(`${key}=${obj[key]}`);
-  }
-  if (query.length) {
-    return `?${query.join("&")}`;
-  }
-  return "";
-}
-
-/**
- * Converts a search string to a object key/value pair.
- *
- * @param search - Search string to convert to object.
- */
-function toQueryObject(search: string): any {
-  const result: any = {};
-  if (search) {
-    search
-      .replace("?", "")
-      .split("&")
-      .forEach((filter: string): void => {
-        const [key, val] = filter.split(/=(.+)/);
-        result[key] = val;
-      });
-  }
-  return result;
 }

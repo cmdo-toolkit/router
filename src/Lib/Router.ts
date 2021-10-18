@@ -1,12 +1,13 @@
 import EventEmitter from "eventemitter3";
 import type { BrowserHistory, HashHistory, Location, MemoryHistory } from "history";
 
-import { Request } from "./Action";
-import { ActionRejectedError, RenderActionMissingError, RouteNotFoundError } from "./Error";
+import { ActionRejectedError } from "../Errors/Action";
+import { RenderActionMissingError, RouteNotFoundError } from "../Errors/Route";
+import type { Request } from "../Types/Action";
+import { addRoute } from "../Utils/Routes";
 import { Query } from "./Query";
 import { Route } from "./Route";
 import { handleRoutingRequest } from "./RouteHandler";
-import { addRoute } from "./Routes";
 import { State } from "./State";
 import { getLocationOrigin, setLocationOrigin } from "./Tracker";
 import { ValueStore } from "./ValueStore";

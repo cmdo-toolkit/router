@@ -1,4 +1,4 @@
-export type { Action, ActionResponse, Request, Response } from "./Action";
-export { Route } from "./Route";
-export { Router } from "./Router";
+export { Route } from "./Lib/Route";
+export { Router } from "./Lib/Router";
+export type { Action, ActionResponse, Request, Response } from "./Types/Action";
 export { createBrowserHistory, createHashHistory, createMemoryHistory } from "history";
